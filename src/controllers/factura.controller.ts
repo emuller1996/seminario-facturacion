@@ -7,13 +7,13 @@ import {
   Where,
 } from '@loopback/repository';
 import {
-  post,
-  param,
+  del,
   get,
   getModelSchemaRef,
+  param,
   patch,
+  post,
   put,
-  del,
   requestBody,
   response,
 } from '@loopback/rest';
@@ -23,7 +23,7 @@ import {FacturaRepository} from '../repositories';
 export class FacturaController {
   constructor(
     @repository(FacturaRepository)
-    public facturaRepository : FacturaRepository,
+    public facturaRepository: FacturaRepository,
   ) {}
 
   @post('/facturas')
@@ -52,9 +52,7 @@ export class FacturaController {
     description: 'Factura model count',
     content: {'application/json': {schema: CountSchema}},
   })
-  async count(
-    @param.where(Factura) where?: Where<Factura>,
-  ): Promise<Count> {
+  async count(@param.where(Factura) where?: Where<Factura>): Promise<Count> {
     return this.facturaRepository.count(where);
   }
 
@@ -105,8 +103,9 @@ export class FacturaController {
     },
   })
   async findById(
-    @param.path.number('id') id: number,
-    @param.filter(Factura, {exclude: 'where'}) filter?: FilterExcludingWhere<Factura>
+    @param.path.number('id') id: string,
+    @param.filter(Factura, {exclude: 'where'})
+    filter?: FilterExcludingWhere<Factura>,
   ): Promise<Factura> {
     return this.facturaRepository.findById(id, filter);
   }
@@ -116,7 +115,7 @@ export class FacturaController {
     description: 'Factura PATCH success',
   })
   async updateById(
-    @param.path.number('id') id: number,
+    @param.path.number('id') id: string,
     @requestBody({
       content: {
         'application/json': {
@@ -134,7 +133,7 @@ export class FacturaController {
     description: 'Factura PUT success',
   })
   async replaceById(
-    @param.path.number('id') id: number,
+    @param.path.number('id') id: string,
     @requestBody() factura: Factura,
   ): Promise<void> {
     await this.facturaRepository.replaceById(id, factura);
@@ -144,7 +143,7 @@ export class FacturaController {
   @response(204, {
     description: 'Factura DELETE success',
   })
-  async deleteById(@param.path.number('id') id: number): Promise<void> {
+  async deleteById(@param.path.number('id') id: string): Promise<void> {
     await this.facturaRepository.deleteById(id);
   }
 }

@@ -4,3 +4,6 @@ export * from './cliente.controller';
 export * from './factura.controller';
 export * from './producto.controller';
 export * from './producto-categoria.controller';
+export * from './factura-producto.controller';
+export * from './factura-factura-producto.controller';
+export * from './factura-producto-factura.controller';

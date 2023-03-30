@@ -1,13 +1,14 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, hasMany, model, property} from '@loopback/repository';
+import {FacturaProducto} from './factura-producto.model';
 
 @model()
 export class Factura extends Entity {
   @property({
-    type: 'number',
+    type: 'string',
     id: true,
     generated: true,
   })
-  id?: number;
+  id?: string;
 
   @property({
     type: 'date',
@@ -33,6 +34,8 @@ export class Factura extends Entity {
   })
   total: number;
 
+  @hasMany(() => FacturaProducto)
+  FACTURAPRODUCTOS: FacturaProducto[];
 
   constructor(data?: Partial<Factura>) {
     super(data);
