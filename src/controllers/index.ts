@@ -7,3 +7,4 @@ export * from './producto-categoria.controller';
 export * from './factura-producto.controller';
 export * from './factura-factura-producto.controller';
 export * from './factura-producto-factura.controller';
+export * from './user.controller';
